@@ -53,7 +53,7 @@ jobs:
           
       - name: Checking Image Overview
         run: |
-          docker scout quickview sudha > image-scan-overview.csv
+          docker scout quickview archana > image-scan-overview.csv
           cat image-scan-overview.csv
          
       - name: Send CVE Report via Email
