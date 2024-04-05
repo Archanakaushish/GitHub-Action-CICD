@@ -21,6 +21,21 @@ jobs:
           echo "${{ secrets.DOCKER_PASSWORD_TOKEN }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
           docker build . -t archana
 
+      - name: Install Trivy
+        run: |
+          sudo apt-get install wget apt-transport-https gnupg lsb-release
+          wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+          echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
+          sudo apt-get update
+          sudo apt-get install trivy
+          clear
+          trivy --version
+
+      - name: Run Trivy
+        run: |
+          trivy image sudha --format csv > image-trivy-scan.csv
+          cat image-trivy-scan.csv
+
       - name: Install Docker Scout
         run: |
           sudo apt update && sudo apt -y install curl
@@ -29,12 +44,12 @@ jobs:
 
       - name: Run Docker Scout CVE Scan
         run: |
-          docker scout cves archana > image-cves-scan.csv
+          docker scout cves sudha > image-cves-scan.csv
           cat image-cves-scan.csv
           
       - name: Checking Image Overview
         run: |
-          docker scout quickview archana > image-scan-overview.csv
+          docker scout quickview sudha > image-scan-overview.csv
           cat image-scan-overview.csv
          
       - name: Send CVE Report via Email
@@ -48,10 +63,11 @@ jobs:
           body: >
             Hello Friends 😇,
 
+
             Please find attached the CVE report and overview for the Docker
             image.
             Warm regards,
-           Archana Kaushish
-          to: archanakaushish@gmail.com
+            Archana Kaushish
+          to: kaushisharchana@gmail.com
           from: '${{ secrets.EMAIL_USERNAME }}'
           attachments: image-cves-scan.csv,image-scan-overview.csv,image-trivy-scan.csv
