@@ -16,11 +16,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: name: Build Docker Image
+      - name: Build Docker Image
         run: |
-       echo "${{ secrets.DOCKER_PASSWORD_TOKEN }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-       docker build . -t archana
-
+          echo "${{ secrets.DOCKER_PASSWORD_TOKEN }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+          docker build . -t archana
 
       - name: Install Trivy
         run: |
@@ -63,7 +62,6 @@ jobs:
           subject: CVE Report for Docker Image
           body: >
             Hello Friends 😇,
-
 
             Please find attached the CVE report and overview for the Docker
             image.
