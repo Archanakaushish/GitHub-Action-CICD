@@ -34,8 +34,11 @@ jobs:
       - name: Run Trivy and Convert to CSV
         run: |
           trivy image archana --format json > image-trivy-scan.json
-          jq -r '(.[0] | keys_unsorted) as $keys | $keys, map([.[ $keys[] ]])[] | @csv' image-trivy-scan.json > image-trivy-scan.csv
-          cat image-trivy-scan.csv
+          cat image-trivy-scan.json  # Troubleshooting step: Print JSON data
+          echo "jq -r '(.[0] | keys_unsorted) as $keys | $keys, map([.[ $keys[] ]])[] | @csv' image-trivy-scan.json"  # Troubleshooting step: Print jq command
+
+          # The `jq` command and subsequent operations will be performed here
+          # Add error handling if required
 
       - name: Install Docker Scout
         run: |
