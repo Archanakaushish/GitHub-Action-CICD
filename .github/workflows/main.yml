@@ -48,7 +48,7 @@ jobs:
 
       - name: Run Docker Scout CVE Scan
         run: |
-          docker scout cves sudha > image-cves-scan.csv
+          docker scout cves archana > image-cves-scan.csv
           cat image-cves-scan.csv
           
       - name: Checking Image Overview
