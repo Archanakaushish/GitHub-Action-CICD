@@ -33,9 +33,8 @@ jobs:
 
       - name: Run Trivy and Convert to CSV
         run: |
-          trivy image archana --format json > image-trivy-scan.json
-          jq -r '(.[0] | keys_unsorted) as $keys | $keys, map([.[ $keys[] ]])[] | @csv' image-trivy-scan.json > image-trivy-scan.csv
-          cat image-trivy-scan.csv
+          trivy image archana --format table > image-trivy-scan.txt
+          cat image-trivy-scan.txt
 
       - name: Install Docker Scout
         run: |
@@ -69,4 +68,4 @@ jobs:
             Archana Kaushish
           to: kaushisharchana@gmail.com
           from: '${{ secrets.EMAIL_USERNAME }}'
-          attachments: image-cves-scan.csv,image-scan-overview.csv,image-trivy-scan.csv
+          attachments: image-cves-scan.csv,image-scan-overview.csv,image-trivy-scan.txt
