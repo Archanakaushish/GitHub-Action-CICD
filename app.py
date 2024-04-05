@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def helloworld():
-    return "Docker Image Scanner - Powered by Sudha Yadav !!!"
+    return "Docker Image Scanner - Powered by Archana Kaushish !!!"
 
 
 if __name__ == "__main__":
