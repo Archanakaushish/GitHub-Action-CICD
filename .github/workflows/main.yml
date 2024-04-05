@@ -31,10 +31,11 @@ jobs:
           clear
           trivy --version
 
-      - name: Run Trivy
-        run: |
-          trivy image archana --format csv > image-trivy-scan.csv
-          cat image-trivy-scan.csv
+     - name: Run Trivy
+       run: |
+         trivy image archana --format json > image-trivy-scan.json
+         cat image-trivy-scan.json
+
 
       - name: Install Docker Scout
         run: |
