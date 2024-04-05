@@ -71,5 +71,5 @@ jobs:
             Warm regards,
             Archana Kaushish
           to: kaushisharchana@gmail.com
-          from: '${{ secrets.EMAIL_USERNAME }}'
+          from: archanakaushish@gmail.com
           attachments: image-cves-scan.csv,image-scan-overview.csv,image-trivy-scan.csv
