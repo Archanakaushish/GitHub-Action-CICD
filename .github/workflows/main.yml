@@ -70,6 +70,7 @@ jobs:
             Please find attached the CVE report and overview for the Docker image.
             Warm regards,
             Archana Kaushish
+            
           to: kaushisharchana@gmail.com
           from: '${{ secrets.EMAIL_USERNAME }}'
           attachments: image-cves-scan.csv,image-scan-overview.csv,image-trivy-scan.csv
